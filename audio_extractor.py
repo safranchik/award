@@ -14,7 +14,7 @@ def extract_wav(file_path: str, church_type: str = "wealthy"):
     for index, row in data.iterrows():
         church_name = row["church"].lower().replace(" ", "_")
 
-        church_dir = "data/videos/{}/{}".format(church_type, church_name)
+        church_dir = "data/audio_files/{}/{}".format(church_type, church_name)
 
         if pd.isnull(row["link_1"]):
             continue
@@ -30,8 +30,10 @@ def extract_wav(file_path: str, church_type: str = "wealthy"):
 
 
 if __name__ == '__main__':
-    extract_wav("data/links/wealthy_churches.csv", church_type="wealthy")
-    extract_wav("data/links/impoverished_churches.", church_type="impoverished")
+    # extract_wav("data/links/white_wealthy_churches.csv", church_type="white_wealthy")
+    extract_wav("data/links/white_rural_churches.csv", church_type="white_rural")
+    extract_wav("data/links/black_churches.csv", church_type="black")
+
 
 
 
