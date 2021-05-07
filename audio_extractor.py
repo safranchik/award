@@ -30,9 +30,9 @@ def extract_wav(file_path: str, church_type: str = "wealthy"):
 
 
 if __name__ == '__main__':
-    # extract_wav("data/links/white_wealthy_churches.csv", church_type="white_wealthy")
-    extract_wav("data/links/white_rural_churches.csv", church_type="white_rural")
-    extract_wav("data/links/black_churches.csv", church_type="black")
+    extract_wav("data/links/white_wealthy_churches.csv", church_type="white_wealthy")
+    # extract_wav("data/links/white_rural_churches.csv", church_type="white_rural")
+    # extract_wav("data/links/black_churches.csv", church_type="black")
 
 
 
