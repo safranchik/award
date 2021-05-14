@@ -13,6 +13,15 @@ import re
 
 #nltk.download('punkt') 
 
+def print_topics(ldamodel, num_topics, num_words):
+    topics = ldamodel.print_topics(num_topics=num_topics, num_words = num_words)
+    for i, topic in enumerate(topics):
+        print("Topic", i)
+        words = topic[1].split(" + ")
+        for j, word in enumerate(words):
+            print("\tWord {}:".format(j+1), word)
+
+
 def LDA_analysis(church_type = "white_wealthy", num_topics=2, passes=20, num_words=15,
                  stopwords = STOPWORDS, stemmer = PorterStemmer(), tokenizer = TweetTokenizer()):
     
@@ -46,8 +55,8 @@ def LDA_analysis(church_type = "white_wealthy", num_topics=2, passes=20, num_wor
     # Generating and fitting model
     ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=num_topics, id2word = dictionary, passes=passes)
 
-    print(church_type)
-    print(ldamodel.print_topics(num_topics=num_topics, num_words = num_words), "\n")
+    print("\nChurch type: {}".format(church_type))
+    print_topics(ldamodel, num_topics, num_words)
     
 if __name__ == '__main__':
 
@@ -62,6 +71,10 @@ if __name__ == '__main__':
     # Stemmer
     p_stemmer = PorterStemmer()
 
-    LDA_analysis("black", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer)
-    LDA_analysis("white_wealthy", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer)
-    LDA_analysis("white_rural", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer)
+    # LDA parameters
+    num_topics = 2
+    passes = 25
+
+    LDA_analysis("black", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer, passes=passes, num_topics=num_topics)
+    LDA_analysis("white_wealthy", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer, passes=passes, num_topics=num_topics)
+    LDA_analysis("white_rural", tokenizer=tokenizer, stopwords=en_stop, stemmer=p_stemmer, passes=passes, num_topics=num_topics)
